@@ -4,16 +4,24 @@ import './Sort.css'
 import Column from './Column'
 import variants from './sort-variants'
 
-const count = 15
-
 export default class Sort extends Component {
   constructor (props) {
     super(props)
-
     this.updateLists = this.updateLists.bind(this)
-
+    this.changeCount = this.changeCount.bind(this)
     this.state = {
-      queue: [0],
+      count: 15
+    }
+  }
+
+  componentWillMount () {
+    this.reset()
+  }
+
+  reset () {
+    const { count } = this.state
+
+    this.setState({
       variants: _.reduce(variants, (result, sortFunc, name) => {
         const list = _.shuffle(_.times(count))
 
@@ -28,28 +36,49 @@ export default class Sort extends Component {
               }, 200 * time)
             }),
             index: -1,
-            count
+            count: this.state.count || 15
           }}
         },
       {})
-    }
+    })
   }
 
   updateLists (name, list, index, time) {
     const valriant = this.state.variants[name]
-    this.setState({ variants: { ...this.state.variants, [name]: { ...valriant, time, list, index } } })
+
+    this.setState({
+      variants: {
+        ...this.state.variants, 
+        [name]: {
+          ...valriant,
+          time,
+          list: _.compact(list),
+          index
+        }
+      }
+    })
+  }
+
+  changeCount (e) {
+    this.setState({
+      count: +e.target.value
+    }, this.reset)
   }
 
   render() {
-    const { variants } = this.state
+    const { variants, count } = this.state
 
     return (
       <div className="Sort">
-        {_.map(variants, (valriant, name) => (
-          <Column key={`column-${name}`} name={name} {...valriant} />
-        ))}
+        <input value={count} onChange={this.changeCount} />
+
+        <div className="container">
+          {_.map(variants, (valriant, name) => (
+            <Column key={`column-${name}`} name={name} {...valriant} />
+          ))}
+        </div>
       </div>
-    );
+    )
   }
 }
 

@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-function bubble_tmp (list, cb) {
+export default (list, cb) => {
   const result = _.clone(list)
 
   _.forEach(result, (item, j) => {
@@ -13,6 +13,4 @@ function bubble_tmp (list, cb) {
     })
   })
 }
-
-export default bubble_tmp
 

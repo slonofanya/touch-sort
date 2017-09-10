@@ -13,7 +13,7 @@ li {
   padding: 0;
   position: absolute;
   border: 1px solid;
-  transition: all .5s ease-out 0.5s;
+  transition: all .1s ease-out .1s;
   list-style: none;
 }
 

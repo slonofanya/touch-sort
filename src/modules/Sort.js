@@ -25,7 +25,7 @@ export default class Sort extends Component {
             onClick: sortFunc.bind(this, list, (list, index, time) => {
               setTimeout(() => {
                 this.updateLists(name, list, index, time)
-              }, 300 * time)
+              }, 200 * time)
             }),
             index: -1,
             count
@@ -37,7 +37,7 @@ export default class Sort extends Component {
 
   updateLists (name, list, index, time) {
     const valriant = this.state.variants[name]
-    this.setState({ variants: { [name]: { ...valriant, time, list, index } } })
+    this.setState({ variants: { ...this.state.variants, [name]: { ...valriant, time, list, index } } })
   }
 
   render() {
@@ -46,7 +46,7 @@ export default class Sort extends Component {
     return (
       <div className="Sort">
         {_.map(variants, (valriant, name) => (
-          <Column key={`column-${name}`} {...valriant} />
+          <Column key={`column-${name}`} name={name} {...valriant} />
         ))}
       </div>
     );

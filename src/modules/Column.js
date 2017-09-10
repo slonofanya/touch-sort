@@ -15,6 +15,8 @@ export default class Column extends Component {
 
     return (
       <div className="Column">
+        <h3>{name}</h3>
+
         <p>{time}</p>
 
         <button onClick={onClick}>Sort</button>

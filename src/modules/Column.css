@@ -1,0 +1,23 @@
+.Column {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+}
+
+ul {
+  position: relative;
+  padding: 0;
+}
+
+li {
+  padding: 0;
+  position: absolute;
+  border: 1px solid;
+  transition: all .5s ease-out 0.5s;
+  list-style: none;
+}
+
+li.touched {
+  background-color: #cfc;
+}
+
